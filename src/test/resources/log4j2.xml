@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <!-- Define Properties -->
+    <Properties>
+        <Property name="logFileName">logs/automation-test.log</Property>
+        <Property name="logPattern">%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Property>
+    </Properties>
+
+    <!-- Appenders -->
+    <Appenders>
+        <!-- Console Appender -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${logPattern}" />
+        </Console>
+
+        <!-- Rolling File Appender -->
+        <RollingFile name="FileAppender" fileName="${logFileName}" filePattern="logs/automation-test-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout pattern="${logPattern}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10MB" />
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <!-- Loggers -->
+    <Loggers>
+        <!-- Root Logger -->
+        <Root level="info">
+           <!-- <AppenderRef ref="Console" /> --> 
+            <AppenderRef ref="FileAppender" />
+        </Root>
+    </Loggers>
+</Configuration>
